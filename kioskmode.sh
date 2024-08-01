@@ -189,13 +189,14 @@ if [ "$firefoxuse" == "1" ] ; then
 
 	#install xdo tool
 	while [ -z "$xdoq" ] ; do
-		read -p "Install \"xdotool\" to simulate \"F11\" key press (for fullscreen browser)? (y/n):" xdoq
+		read -p "Install \"xdotool\" or (\"ydotool\" on wayland) to simulate \"F11\" key press (for fullscreen browser)? (y/n):" xdoq
 
 		if [ ! -z "$xdoq" ] ; then
 			if [[ "$xdoq" == "n" || "$xdoq" == "no" ]] ; then
 				echo "OK nevermind!"
 				break;
 				if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+					echo "detected Wayland. Installing ydotool.."
 					chmod +x ydotool-manage
 					if [ "$DISTRO" == "ubuntu" ]; then
 						ydotool-manage install
@@ -207,6 +208,7 @@ if [ "$firefoxuse" == "1" ] ; then
 						echo "ydotool key 87:1 87:0" >> $MYSCRIPT
 					fi
 				else
+					echo "detected X-Server. Installing xdotool.."
 					if [ "$DISTRO" == "ubuntu" ]; then
 						apt install xdotool
 					else
