@@ -189,7 +189,7 @@ if [ "$firefoxuse" == "1" ] ; then
 
 	#install xdo tool
 	while [ -z "$xdoq" ] ; do
-		read -p "Install \"xdotool\" or (\"ydotool\" on wayland) to simulate \"F11\" key press (for fullscreen browser)? (y/n):" xdoq
+		read -p "Install \"xdotool\" (or \"ydotool\" on wayland) to simulate \"F11\" key press (for fullscreen browser)? (y/n):" xdoq
 
 		if [ ! -z "$xdoq" ] ; then
 			if [[ "$xdoq" == "n" || "$xdoq" == "no" ]] ; then
