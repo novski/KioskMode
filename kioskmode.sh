@@ -197,7 +197,7 @@ if [ "$firefoxuse" == "1" ] ; then
 				break;
 			elif  [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
 				echo $(whoami)
-				SESSION_TYPE=$(loginctl show-session $(loginctl | awk -v u="$USERNAME" '$0 ~ u{ print $1 }') -p Type | awk -F= '{ print $2 }')
+				SESSION_TYPE=$(loginctl show-session $(loginctl | awk -v u="$response" '$0 ~ u{ print $1 }') -p Type | awk -F= '{ print $2 }')
 				echo $SESSION_TYPE
 				echo "."
 				SESSION_TYPE=$XDG_SESSION_TYPE
