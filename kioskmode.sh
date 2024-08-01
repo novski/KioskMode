@@ -196,9 +196,12 @@ if [ "$firefoxuse" == "1" ] ; then
 				echo "OK nevermind!"
 				break;
 			elif  [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
-				echo $XDG_SESSION_TYPE
+				echo "loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | awk -F= '{print $2}'"
 				echo "."
-				echo "$XDG_SESSION_TYPE"
+				echo "loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | sed 's/Type=//'"
+				echo ".."
+				SESSION_TYPE=$(loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | awk -F= '{print $2}')
+				echo $SESSION_TYPE
 				if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 					echo "detected Wayland. Installing ydotool.."
 					chmod +x ydotool-manage
