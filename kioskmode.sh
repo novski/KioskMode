@@ -187,19 +187,19 @@ if [ "$firefoxuse" == "1" ] ; then
 	echo "Placing desktop file at: $MYDESKTOPFILE"	
 	chown $response:$response -R /home/$response/.config/autostart/
 
-	#install ydo tool
-	while [ -z "$ydoq" ] ; do
-		read -p "Install \"ydotool\" to simulate \"F11\" key press (for fullscreen browser)? (y/n):" ydoq
+	#install xdo tool
+	while [ -z "$xdoq" ] ; do
+		read -p "Install \"xdotool\" to simulate \"F11\" key press (for fullscreen browser)? (y/n):" xdoq
 
-		if [ ! -z "$ydoq" ] ; then
-			if [[ "$ydoq" == "y" || "$ydoq" == "yes" ]] ; then
+		if [ ! -z "$xdoq" ] ; then
+			if [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
 				if [ "$DISTRO" == "ubuntu" ] ; then
-					apt install ydotool
+					apt install xdotool
 				else
 					yum -y install epel-release && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
-					yum -y install ydotool
+					yum -y install xdotool
 				fi
-			echo "ydotool key 69:1 69:0" >> $MYSCRIPT
+			echo "xdotool key \"F11\"" >> $MYSCRIPT
 			else	
 				echo "OK nevermind!"
 				break;
