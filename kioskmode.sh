@@ -196,7 +196,7 @@ if [ "$firefoxuse" == "1" ] ; then
 				echo "OK nevermind!"
 				break;
 			elif  [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
-				if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+				if [ $XDG_SESSION_TYPE == "wayland" ]; then
 					echo "detected Wayland. Installing ydotool.."
 					chmod +x ydotool-manage
 					if [ "$DISTRO" == "ubuntu" ]; then
