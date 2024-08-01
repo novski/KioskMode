@@ -32,7 +32,7 @@ if [ "$1" = "install" ] ; then
     sudo -v
 
     # pre reqs
-    sudo apt update && sudo apt install cmake scdoc pkg-config
+    sudo apt update && sudo apt install cmake scdoc pkg-config -y
 
     # Check if ydotool repo is downloaded
     if [ ! -d /opt/ydotool ]; then 
@@ -58,16 +58,16 @@ if [ "$1" = "install" ] ; then
     sudo chmod +s $(which ydotool)
 
     # Install systemd service
-    sudo rm /etc/systemd/system/ydotool.service
+    sudo rm /etc/systemd/system/ydotoold.service
     sudo ln -s /usr/lib/systemd/user/ydotoold.service /etc/systemd/system/
     # Reload the systemd daemon
     sudo systemctl daemon-reload
     # Reload enable the service
-    sudo systemctl enable ydotool
+    sudo systemctl enable ydotoold
     # Reload start ydotool
-    sudo systemctl start ydotool
+    sudo systemctl start ydotoold
     # Check that it is running
-    sudo systemctl status ydotool
+    sudo systemctl status ydotoold
 
     echo "ydotoold version: $(ydotoold --version)"
     echo ""
