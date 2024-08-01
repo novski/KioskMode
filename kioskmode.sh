@@ -199,7 +199,8 @@ if [ "$firefoxuse" == "1" ] ; then
 				SESSION_TYPE=$(loginctl show-session $(loginctl | awk -v u="$USERNAME" '$0 ~ u{ print $1 }') -p Type | awk -F= '{ print $2 }')
 				echo $SESSION_TYPE
 				echo "."
-				echo $(loginctl show-session $(awk -v u="$USERNAME" '$0 ~ u{ print $1}'<<<$(loginctl)) -p Type | awk -F= '{print $2}')
+				SESSION_TYPE=$XDG_SESSION_TYPE
+				echo $SESSION_TYPE
 				echo ".."
 				SESSION_TYPE=$(loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | awk -F= '{print $2}')
 				echo $SESSION_TYPE
