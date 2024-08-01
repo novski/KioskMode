@@ -192,17 +192,31 @@ if [ "$firefoxuse" == "1" ] ; then
 		read -p "Install \"xdotool\" to simulate \"F11\" key press (for fullscreen browser)? (y/n):" xdoq
 
 		if [ ! -z "$xdoq" ] ; then
-			if [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
-				if [ "$DISTRO" == "ubuntu" ] ; then
-					apt install xdotool
-				else
-					yum -y install epel-release && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
-					yum -y install xdotool
-				fi
-			echo "xdotool key \"F11\"" >> $MYSCRIPT
-			else	
+			if [[ "$xdoq" == "n" || "$xdoq" == "no" ]] ; then
 				echo "OK nevermind!"
 				break;
+				if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+					chmod +x ydotool-manage
+					if [ "$DISTRO" == "ubuntu" ]; then
+						ydotool-manage install
+					else
+						echo " *** Untested variant. Please report if this works for your distro! ***"
+						ydotool-manage install
+					fi
+					if [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
+						echo "ydotool key 87:1 87:0" >> $MYSCRIPT
+					fi
+				else
+					if [ "$DISTRO" == "ubuntu" ]; then
+						apt install xdotool
+					else
+						yum -y install epel-release && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+						yum -y install xdotool
+					fi
+					if [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
+						echo "xdotool key \"F11\"" >> $MYSCRIPT
+					fi
+				fi
 			fi
 		fi
 	done
