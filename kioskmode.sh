@@ -195,29 +195,30 @@ if [ "$firefoxuse" == "1" ] ; then
 			if [[ "$xdoq" == "n" || "$xdoq" == "no" ]] ; then
 				echo "OK nevermind!"
 				break;
+			elif  [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
 				if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
 					echo "detected Wayland. Installing ydotool.."
 					chmod +x ydotool-manage
 					if [ "$DISTRO" == "ubuntu" ]; then
-						ydotool-manage install
+						echo "use ydotool-manage install to install ydotool"
+						sh ydotool-manage install
 					else
 						echo " *** Untested variant. Please report if this works for your distro! ***"
-						ydotool-manage install
+						echo "use ydotool-manage install to install ydotool"
+						sh ydotool-manage install
 					fi
-					if [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
-						echo "ydotool key 87:1 87:0" >> $MYSCRIPT
-					fi
+					echo "ydotool key 87:1 87:0" >> $MYSCRIPT
 				else
 					echo "detected X-Server. Installing xdotool.."
 					if [ "$DISTRO" == "ubuntu" ]; then
+						echo "use apt to install xdotool"
 						apt install xdotool
 					else
+						echo "use yum to install xdotool"
 						yum -y install epel-release && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
 						yum -y install xdotool
 					fi
-					if [[ "$xdoq" == "y" || "$xdoq" == "yes" ]] ; then
-						echo "xdotool key \"F11\"" >> $MYSCRIPT
-					fi
+					echo "xdotool key \"F11\"" >> $MYSCRIPT
 				fi
 			fi
 		fi
