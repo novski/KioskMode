@@ -146,7 +146,7 @@ done
 outputfile_autostart_script=$( cat << EOF 
 #!/bin/bash
 firefox --url \"$urlq\" &
-sleep 3;\n
+sleep 5;\n
 EOF
 )
 
